@@ -147,21 +147,26 @@
         #secret-speaker::before,#secret-speaker::after { content:""; position:absolute; left:50%; border:5px solid #050505; border-radius:50%; transform:translateX(-50%); background:#3b3b3b; }
         #secret-speaker::before { top:10px; width:28px; height:28px; } #secret-speaker::after { bottom:8px; width:46px; height:46px; }
         #secret-hud { position:absolute; inset:0; z-index:4; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:32px; box-sizing:border-box; font-family:"Comic Sans MS","Segoe Print",cursive; }
-        #secret-distance { padding:7px 14px; background:rgba(0,0,0,.72); color:#e8dc8b; border:1px solid rgba(255,255,255,.2); font:900 12px Tahoma,sans-serif; letter-spacing:3px; }
+        #secret-distance { padding:10px 18px; background:rgba(0,0,0,.82); color:#fff3a5; border:2px solid #fff3a5; border-radius:6px; font:900 clamp(13px,2vw,19px) Tahoma,sans-serif; letter-spacing:2px; text-align:center; box-shadow:0 5px 25px rgba(0,0,0,.55); }
+        #secret-help { margin-top:8px; padding:6px 12px; color:#111; background:rgba(255,244,158,.9); border:2px solid #111; border-radius:5px; font:900 12px Tahoma,sans-serif; letter-spacing:.5px; text-align:center; }
         #secret-code-panel { margin:auto; width:min(780px,84vw); padding:28px; text-align:center; background:rgba(194,181,96,.9); border:5px solid #050505; transform:rotate(-1.5deg) scale(.75); opacity:0; pointer-events:none; transition:opacity .4s,transform .4s; box-shadow:0 20px 80px rgba(0,0,0,.5); }
         #secret-code-panel.found { opacity:1; transform:rotate(-1.5deg) scale(1); pointer-events:auto; }
         #secret-code-panel .scratch { font-size:clamp(20px,3.5vw,42px); font-weight:900; letter-spacing:3px; }
         #secret-code-text { display:block; margin:18px auto; padding:10px 16px; width:fit-content; max-width:90%; border:5px solid #050505; font-size:clamp(22px,4.5vw,54px); font-weight:900; letter-spacing:clamp(2px,.8vw,9px); user-select:text; }
         .secret-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
         .secret-actions button,.secret-arrow { padding:9px 16px; border:3px solid #050505; background:rgba(216,202,113,.88); color:#050505; font:900 14px "Comic Sans MS",cursive; cursor:pointer; }
-        #secret-controls { display:grid; grid-template-columns:repeat(3,54px); gap:6px; align-items:center; justify-content:center; }
-        .secret-arrow { width:54px; height:46px; padding:0; font:900 24px Tahoma,sans-serif; }
+        #secret-controls { display:grid; grid-template-columns:repeat(3,64px); gap:8px; align-items:center; justify-content:center; }
+        .secret-arrow { width:64px; height:54px; padding:0; font:900 25px Tahoma,sans-serif; border-radius:6px; transition:transform .15s,background .15s,box-shadow .15s; }
+        .secret-arrow.next-step { background:#fff6a2; transform:scale(1.2); box-shadow:0 0 0 4px #050505,0 0 26px #fff6a2; animation:secretHintPulse .8s ease-in-out infinite alternate; }
+        .secret-arrow.wrong-step { animation:secretWrong .28s ease; background:#ff9b75; }
         .secret-arrow.up { grid-column:2; } .secret-arrow.left { grid-column:1; grid-row:2; } .secret-arrow.down { grid-column:2; grid-row:2; } .secret-arrow.right { grid-column:3; grid-row:2; }
         #secret-exit { position:absolute; right:22px; top:22px; z-index:6; border:2px solid #ddd; background:rgba(0,0,0,.72); color:#fff; padding:9px 12px; cursor:pointer; font-weight:900; }
         @keyframes secretNoclipIn { 0%{opacity:0;transform:perspective(900px) translateY(-110%) rotateX(75deg) scale(.35);filter:blur(18px)} 58%{opacity:1;transform:perspective(900px) translateY(6%) rotateX(-7deg) scale(1.07)} 100%{transform:none;filter:none} }
         @keyframes secretNoclipOut { 0%{opacity:1;transform:none;filter:none} 100%{opacity:0;transform:perspective(900px) translateY(-115%) rotateX(72deg) scale(.25);filter:blur(22px)} }
         @keyframes secretBuzz { 50%{transform:translate(1px,-1px)} }
         @keyframes secretLightFlicker { 0%,91%,94%,100%{opacity:1} 92%,93%{opacity:.15} }
+        @keyframes secretHintPulse { from{transform:scale(1.12)} to{transform:scale(1.25)} }
+        @keyframes secretWrong { 35%{transform:translateX(-7px)} 70%{transform:translateX(7px)} }
 
         .addon-code-box { padding:12px; border:1px solid #333; border-radius:5px; background:#090909; }
         .addon-code-box label { display:block; color:#aaa; font-size:11px; font-weight:800; letter-spacing:1px; margin-bottom:7px; }
@@ -327,7 +332,10 @@
         }
         #multiplayer-modal { width: min(430px, calc(100vw - 28px)); }
         .multiplayer-body { padding: 20px; display: grid; gap: 13px; }
-        .multiplayer-body input { width: 100%; box-sizing: border-box; padding: 11px; background:#111; color:#fff; border:1px solid #666; border-radius:4px; text-transform:uppercase; letter-spacing:3px; font-weight:900; text-align:center; }
+        .multiplayer-body input { width: 100%; box-sizing: border-box; padding: 11px; background:#111; color:#fff; border:1px solid #666; border-radius:4px; font-weight:900; text-align:center; }
+        #multiplayer-code-input { text-transform:uppercase; letter-spacing:3px; }
+        #multiplayer-name-input { text-transform:none; letter-spacing:.4px; border-color:#8a7430; }
+        .multiplayer-name-label { color:#fce330; font:900 11px Tahoma,sans-serif; letter-spacing:1px; text-align:center; }
         .multiplayer-buttons { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
         .multiplayer-buttons button { padding:11px; background:#171717; color:#fff; border:1px solid #777; border-radius:4px; cursor:pointer; font-weight:800; }
         .multiplayer-buttons button:hover { background:#333; }
@@ -452,6 +460,8 @@
         <div id="cm-header">Online Multiplayer</div>
         <div class="multiplayer-body">
             <div id="multiplayer-room-code"></div>
+            <label class="multiplayer-name-label" for="multiplayer-name-input">YOUR PLAYER NAME</label>
+            <input id="multiplayer-name-input" maxlength="16" placeholder="Type your name" autocomplete="nickname">
             <input id="multiplayer-code-input" maxlength="6" placeholder="ROOM CODE" autocomplete="off">
             <div class="multiplayer-buttons"><button onclick="hostMultiplayerRoom()">Host Room</button><button onclick="joinMultiplayerRoom()">Join Room</button></div>
             <div id="multiplayer-admin-panel">
@@ -548,7 +558,7 @@
         <div id="secret-speaker"></div>
         <button id="secret-exit" onclick="closeBackroomsSecret()">NOCLIP BACK TO MENU</button>
         <div id="secret-hud">
-            <div id="secret-distance">FOLLOW THE SOUND • FAR AWAY</div>
+            <div><div id="secret-distance">NEXT: PRESS FORWARD ↑</div><div id="secret-help">Press the glowing arrow. Wrong buttons do not reset you.</div></div>
             <div id="secret-code-panel">
                 <div class="scratch">THE SPEAKER WAS HIDING THIS</div>
                 <span id="secret-code-text">NOCLIP-94-BACTERIA</span>
@@ -1028,8 +1038,54 @@
 
         const webmodNet = window.webmodNet = {
             peer: null, connections: new Map(), hostConnection: null, isHost: false,
-            active: false, roomCode: '', lastStates: new Map()
+            active: false, roomCode: '', lastStates: new Map(), playerName: ''
         };
+        const blockedNameParts = ['fuck','shit','bitch','cunt','dick','pussy','asshole','bastard','whore','slut','nigg','fagg','retard'];
+        const blockedChatPattern = /\b(?:f+u+c+k+|s+h+i+t+|b+i+t+c+h+|c+u+n+t+|d+i+c+k+|p+u+s+s+y+|a+s+s+h+o+l+e+|b+a+s+t+a+r+d+|w+h+o+r+e+|s+l+u+t+|n+i+g+g+\w*|f+a+g+g*\w*|r+e+t+a+r+d+\w*)\b/gi;
+
+        function moderationForm(value) {
+            return String(value || '').toLowerCase()
+                .replace(/[013457@$!]/g, character => ({'0':'o','1':'i','3':'e','4':'a','5':'s','7':'t','@':'a','$':'s','!':'i'}[character] || character))
+                .replace(/[^a-z]/g, '');
+        }
+
+        function hasBlockedLanguage(value) {
+            const normalized = moderationForm(value);
+            return blockedNameParts.some(term => normalized.includes(term));
+        }
+
+        function cleanPlayerName(value, fallback = '') {
+            const cleaned = String(value || '').replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
+            return cleaned.length >= 2 && !hasBlockedLanguage(cleaned) ? cleaned : fallback;
+        }
+
+        function filterMultiplayerText(value) {
+            return String(value || '').trim().slice(0, 140).replace(blockedChatPattern, match => '•'.repeat(Math.min(8, match.length)));
+        }
+
+        function requireMultiplayerName() {
+            const input = document.getElementById('multiplayer-name-input');
+            const rawName = input?.value || '';
+            if (String(rawName).trim().length < 2) {
+                setMultiplayerMessage('Please type a player name with at least 2 letters.', true);
+                input?.focus(); return null;
+            }
+            if (hasBlockedLanguage(rawName)) {
+                setMultiplayerMessage('Please choose a friendly player name without swear words.', true);
+                input?.focus(); return null;
+            }
+            const name = cleanPlayerName(rawName);
+            if (!name) {
+                setMultiplayerMessage('Use only letters, numbers, spaces, _ or - in your name.', true);
+                input?.focus(); return null;
+            }
+            webmodNet.playerName = name;
+            try { localStorage.setItem('webmod_player_name', name); } catch (e) {}
+            input.value = name;
+            return name;
+        }
+
+        try { webmodNet.playerName = cleanPlayerName(localStorage.getItem('webmod_player_name'), ''); } catch (e) {}
         const multiplayerAdminConfig = window.webmodAdminConfig = {
             npcLimit: 40, allowPlayerNPCs: false, allowPlayerNextbots: false
         };
@@ -1103,6 +1159,7 @@
         window.openMultiplayerMenu = function() {
             muffleAudio();
             document.getElementById('multiplayer-modal').style.display = 'block';
+            document.getElementById('multiplayer-name-input').value = webmodNet.playerName || '';
             document.getElementById('multiplayer-room-code').textContent = webmodNet.active ? `ROOM ${webmodNet.roomCode}` : '';
             setMultiplayerMessage(webmodNet.active ? 'Connected. Share this code with a friend.' : 'Host a room and share its code, or enter a friend\'s code to join.');
             refreshMultiplayerAdminUI();
@@ -1154,10 +1211,20 @@
             if (packet.type === 'chat') {
                 const peerId = packet.peerId || sourceConnection?.peer || 'remote';
                 if (peerId === webmodNet.peer?.id) return;
-                const message = String(packet.text || '').trim().slice(0, 140);
+                const message = filterMultiplayerText(packet.text);
                 if (!message) return;
-                window.addGameChatMessage?.(String(packet.name || 'Player').slice(0, 24), message);
-                if (webmodNet.isHost) broadcastMultiplayerPacket({ ...packet, peerId }, sourceConnection?.peer || '');
+                const name = cleanPlayerName(packet.name, 'Player');
+                window.addGameChatMessage?.(name, message);
+                if (webmodNet.isHost) broadcastMultiplayerPacket({ ...packet, peerId, name, text:message }, sourceConnection?.peer || '');
+                return;
+            }
+            if (packet.type === 'player-damage') {
+                const targetPeerId = String(packet.targetPeerId || '');
+                const damage = Math.max(0, Math.min(100, Number(packet.damage) || 0));
+                if (!targetPeerId || damage <= 0) return;
+                const safePacket = { type:'player-damage', targetPeerId, damage, attackerName:cleanPlayerName(packet.attackerName, 'Player') };
+                if (targetPeerId === webmodNet.peer?.id) window.applyMultiplayerDamage?.(safePacket);
+                if (webmodNet.isHost && sourceConnection) broadcastMultiplayerPacket(safePacket, sourceConnection.peer || '');
                 return;
             }
             if (packet.type === 'world-config') {
@@ -1168,6 +1235,7 @@
                 const peerId = packet.peerId || sourceConnection?.peer;
                 if (!peerId || peerId === webmodNet.peer?.id) return;
                 packet.peerId = peerId;
+                packet.name = cleanPlayerName(packet.name, 'Player');
                 webmodNet.lastStates.set(peerId, packet);
                 window.onMultiplayerState?.(packet);
                 if (webmodNet.isHost) broadcastMultiplayerPacket(packet, sourceConnection?.peer || '');
@@ -1225,6 +1293,7 @@
 
         window.hostMultiplayerRoom = function() {
             if (!window.Peer) { setMultiplayerMessage('Online multiplayer could not load. Check your connection and retry.', true); return; }
+            if (!requireMultiplayerName()) return;
             resetMultiplayerPeer();
             const requested = cleanRoomCode(document.getElementById('multiplayer-code-input').value);
             const code = requested.length >= 4 ? requested : Math.random().toString(36).slice(2, 8).toUpperCase();
@@ -1247,6 +1316,7 @@
 
         window.joinMultiplayerRoom = function() {
             if (!window.Peer) { setMultiplayerMessage('Online multiplayer could not load. Check your connection and retry.', true); return; }
+            if (!requireMultiplayerName()) return;
             const code = cleanRoomCode(document.getElementById('multiplayer-code-input').value);
             if (code.length < 4) { setMultiplayerMessage('Enter the 4–6 character room code.', true); return; }
             resetMultiplayerPeer();
@@ -1273,15 +1343,22 @@
 
         window.sendMultiplayerState = function(state) {
             if (!webmodNet.active || !webmodNet.peer?.id) return;
-            const packet = { type: 'player-state', peerId: webmodNet.peer.id, ...state };
+            const packet = { type: 'player-state', peerId: webmodNet.peer.id, name:webmodNet.playerName || 'Player', ...state };
+            if (webmodNet.isHost) broadcastMultiplayerPacket(packet);
+            else sendConnectionPacket(webmodNet.hostConnection, packet);
+        };
+
+        window.sendMultiplayerDamage = function(targetPeerId, damage, attackerName) {
+            if (!webmodNet.active || !webmodNet.peer?.id || !targetPeerId || targetPeerId === webmodNet.peer.id) return;
+            const packet = { type:'player-damage', targetPeerId:String(targetPeerId), damage:Math.max(0, Math.min(100, Number(damage) || 0)), attackerName:cleanPlayerName(attackerName, webmodNet.playerName || 'Player') };
             if (webmodNet.isHost) broadcastMultiplayerPacket(packet);
             else sendConnectionPacket(webmodNet.hostConnection, packet);
         };
 
         window.sendGameChatMessage = function(text) {
-            const message = String(text || '').trim().slice(0, 140);
+            const message = filterMultiplayerText(text);
             if (!message) return;
-            const name = webmodNet.active ? (webmodNet.isHost ? 'Host' : 'Player') : 'You';
+            const name = webmodNet.active ? (webmodNet.playerName || 'Player') : 'You';
             window.addGameChatMessage?.(name, message, true);
             if (!webmodNet.active || !webmodNet.peer?.id) return;
             const packet = { type:'chat', peerId:webmodNet.peer.id, name, text:message };
@@ -1526,7 +1603,7 @@
         let secretBackroomsDepth = 0;
         let secretBackroomsTurn = 0;
         let secretBackroomsScene = 0;
-        const secretMazeRoute = ['up','left','up','right','up','left','up','up','right','up'];
+        const secretMazeRoute = ['right','up','left','up','right','up'];
         const secretMusic = document.getElementById('backrooms-secret-music');
         function mainMenuIsClearForSecret() {
             if (window.webmodInGame || getComputedStyle(document.getElementById('main-menu')).display === 'none') return false;
@@ -1548,8 +1625,12 @@
             speaker.classList.toggle('found-speaker', found);
             secretMusic.volume = .05 + progress * .62;
             const nextMove = secretMazeRoute[secretBackroomsDepth];
-            const directionLabel = { up:'AHEAD', left:'TO YOUR LEFT', right:'TO YOUR RIGHT', down:'BEHIND YOU' };
-            distance.textContent = found ? 'THE SPEAKER IS UP LEFT • FOUND' : `LISTEN • SOUND ${directionLabel[nextMove] || 'IS LOST'}`;
+            const directionLabel = { up:'FORWARD ↑', left:'LEFT ←', right:'RIGHT →', down:'BACK ↓' };
+            distance.textContent = found ? 'YOU FOUND IT! THE CODE IS HERE' : `STEP ${secretBackroomsDepth + 1} OF ${secretMazeRoute.length} • PRESS ${directionLabel[nextMove]}`;
+            document.querySelectorAll('#secret-controls .secret-arrow').forEach(button => {
+                button.classList.toggle('next-step', !found && button.classList.contains(nextMove));
+                button.disabled = found;
+            });
             panel.classList.toggle('found', found);
         }
         window.openBackroomsSecret = function() {
@@ -1571,9 +1652,14 @@
             const secret = document.getElementById('backrooms-secret');
             if (!secret.classList.contains('active')) return;
             if (secretBackroomsDepth >= secretMazeRoute.length) return;
+            const correctDirection = secretMazeRoute[secretBackroomsDepth];
+            if (direction !== correctDirection) {
+                const wrongButton = document.querySelector(`#secret-controls .secret-arrow.${direction}`);
+                wrongButton?.classList.remove('wrong-step'); void wrongButton?.offsetWidth; wrongButton?.classList.add('wrong-step');
+                return;
+            }
             secretBackroomsScene++;
-            if (direction === secretMazeRoute[secretBackroomsDepth]) secretBackroomsDepth++;
-            else secretBackroomsDepth = Math.max(0, secretBackroomsDepth - 1);
+            secretBackroomsDepth++;
             if (direction === 'left') secretBackroomsTurn = Math.max(-3, secretBackroomsTurn - 1);
             else if (direction === 'right') secretBackroomsTurn = Math.min(3, secretBackroomsTurn + 1);
             else if (direction === 'down') secretBackroomsTurn *= .5;
@@ -2346,11 +2432,30 @@
 
             const remotePlayers = new Map();
             let multiplayerSyncTimer = 0;
+            const multiplayerLookDirection = new THREE.Vector3();
 
             function multiplayerColor(peerId) {
                 let hash = 0;
                 for (let i = 0; i < peerId.length; i++) hash = ((hash << 5) - hash + peerId.charCodeAt(i)) | 0;
                 return new THREE.Color().setHSL(Math.abs(hash % 360) / 360, 0.72, 0.55);
+            }
+
+            function addRemotePlayerNameLabel(group, name) {
+                const safeName = cleanPlayerName(name, 'Player');
+                const oldLabel = group.getObjectByName('multiplayer-name-label');
+                if (oldLabel?.userData?.playerName === safeName) return;
+                if (oldLabel) group.remove(oldLabel);
+                const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = 96;
+                const context = canvas.getContext('2d');
+                context.fillStyle = 'rgba(0,0,0,.72)'; context.roundRect(8, 8, 496, 80, 18); context.fill();
+                context.strokeStyle = '#fce330'; context.lineWidth = 5; context.stroke();
+                context.fillStyle = '#fff'; context.font = '900 42px Tahoma, Arial'; context.textAlign = 'center'; context.textBaseline = 'middle';
+                context.fillText(safeName, 256, 49, 455);
+                const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
+                const label = new THREE.Sprite(new THREE.SpriteMaterial({ map:texture, transparent:true, depthTest:false, depthWrite:false }));
+                label.name = 'multiplayer-name-label'; label.userData.playerName = safeName;
+                label.position.set(0, 3.62, 0); label.scale.set(3.7, 0.7, 1); label.renderOrder = 50;
+                group.add(label);
             }
 
             function buildRemotePlayerVisual(group, peerId) {
@@ -2371,6 +2476,7 @@
                     model.position.y -= fittedBox.min.y;
                     model.traverse(child => { if (child.isMesh) { child.castShadow = false; child.receiveShadow = false; } });
                     group.add(model);
+                    addRemotePlayerNameLabel(group, group.userData.playerName || 'Player');
                     return false;
                 }
                 const color = multiplayerColor(peerId);
@@ -2379,6 +2485,7 @@
                 const head = new THREE.Mesh(new THREE.SphereGeometry(0.513, 12, 9), new THREE.MeshLambertMaterial({ color: 0xffd1b3 }));
                 head.position.y = 2.862;
                 group.add(body, head);
+                addRemotePlayerNameLabel(group, group.userData.playerName || 'Player');
                 return true;
             }
 
@@ -2388,6 +2495,7 @@
                 group.position.copy(EngineState.globalSpawnPoint);
                 group.userData.targetPosition = group.position.clone();
                 group.userData.targetYaw = 0;
+                group.userData.playerName = 'Player';
                 scene.add(group);
                 const entry = { group, lastUpdate: performance.now(), isFallback, wasDead: false };
                 remotePlayers.set(peerId, entry);
@@ -2398,7 +2506,14 @@
                 if (!state?.peerId || !Number.isFinite(state.x) || !Number.isFinite(state.y) || !Number.isFinite(state.z)) return;
                 const entry = remotePlayers.get(state.peerId) || createRemotePlayer(state.peerId);
                 entry.group.userData.targetPosition.set(state.x, state.y, state.z);
-                entry.group.userData.targetYaw = Number.isFinite(state.yaw) ? state.yaw : 0;
+                entry.group.userData.targetYaw = Number.isFinite(state.lookX) && Number.isFinite(state.lookZ)
+                    ? Math.atan2(state.lookX, state.lookZ)
+                    : (Number.isFinite(state.yaw) ? state.yaw + Math.PI : 0);
+                const playerName = cleanPlayerName(state.name, 'Player');
+                if (entry.group.userData.playerName !== playerName) {
+                    entry.group.userData.playerName = playerName;
+                    addRemotePlayerNameLabel(entry.group, playerName);
+                }
                 entry.lastUpdate = performance.now();
                 if (state.dead && !entry.wasDead && window.customPropModels?.male07) {
                     const corpse = spawnEntity(state.x, state.y + 0.25, state.z, 'male07', 'ragdoll', null, true);
@@ -2432,9 +2547,11 @@
                 multiplayerSyncTimer -= fullDelta;
                 if (multiplayerSyncTimer <= 0) {
                     multiplayerSyncTimer = EngineState.isMobile ? 0.12 : 0.075;
+                    camera.getWorldDirection(multiplayerLookDirection);
                     window.sendMultiplayerState?.({
                         x: playerCollider.start.x, y: playerCollider.start.y, z: playerCollider.start.z,
-                        yaw: camera.rotation.y, weapon: EngineState.currentWeaponIndex, dead: EngineState.isDead
+                        yaw: camera.rotation.y, lookX:multiplayerLookDirection.x, lookZ:multiplayerLookDirection.z,
+                        weapon: EngineState.currentWeaponIndex, dead: EngineState.isDead
                     });
                 }
             }
@@ -3066,6 +3183,7 @@
 
             function spawnEntity(x, y, z, type, classType='prop', lookTarget = null, isCorpse = false) {
                 let mesh, radius = 1.0, h = 0;
+                let doorWidth = 0, doorHeight = 0, doorThickness = 0;
                 let isNextbot = classType === 'nextbot';
                 let is3DNPC = classType === '3dnpc';
                 let isEntity = classType === 'entity';
@@ -3199,6 +3317,10 @@
                             mesh.updateMatrixWorld(true);
                             const scaledDoorBox = new THREE.Box3().setFromObject(mesh);
                             const scaledDoorCenter = scaledDoorBox.getCenter(new THREE.Vector3());
+                            const scaledDoorSize = scaledDoorBox.getSize(new THREE.Vector3());
+                            doorWidth = Math.max(0.7, scaledDoorSize.x);
+                            doorHeight = Math.max(2.4, scaledDoorSize.y);
+                            doorThickness = THREE.MathUtils.clamp(scaledDoorSize.z, 0.12, 0.48);
                             const hingePoint = new THREE.Vector3(scaledDoorBox.min.x, scaledDoorBox.min.y, scaledDoorCenter.z);
                             mesh.position.sub(hingePoint);
                             const doorHinge = new THREE.Group();
@@ -3325,15 +3447,17 @@
                             spawnTime: clock.getElapsedTime(), isNPC: isNPC, hp: npcConfig?.hp || (type === 'zombie' ? 40 : 100), isDead: false, lastAttack: 0, class: classType, audio: audioObj,
                             mixer: classType === 'ragdoll' ? null : mixer, walk: actionWalk, run: actionRun, idle: actionIdle, attack: actionAttack, attackActions: attackActions, specialActions: specialActions, type: type,
                             lastFootstep: clock.getElapsedTime(), id: Math.floor(Math.random() * 1000), isCorpse: isCorpse,
-                            mass: mass, invMass: 1 / mass, restitution: type === 'crate' ? 0.12 : 0.22, friction: 0.62,
-                            sleepTimer: 0, grounded: false, path: [], pathIndex: 0, pathTimer: Math.random() * 0.3,
+                            mass: mass, invMass: 1 / mass, restitution: type === 'crate' ? 0.055 : 0.09, friction: type === 'metalcar' ? 0.5 : 0.76,
+                            linearDamping: THREE.MathUtils.lerp(0.035, 0.075, THREE.MathUtils.clamp(mass / 220, 0, 1)),
+                            angularDamping: THREE.MathUtils.lerp(0.72, 0.38, THREE.MathUtils.clamp(mass / 220, 0, 1)),
+                            sleepTimer: 0, grounded: false, physgunHoldQuaternion: null, path: [], pathIndex: 0, pathTimer: Math.random() * 0.3,
                             lastPathPosition: new THREE.Vector3(x, y, z), stuckTime: 0, pathTarget: new THREE.Vector3(),
                             config: npcConfig, isTrevor: isTrevor, isBacteria: isBacteria, isAggro: type === 'scp096_static', activeAttack: null, ragdollRig: null, isRagdollHeld: false,
                             scpState: type === 'scp096' ? 'sitting' : (type === 'scp096_static' ? 'enraged' : null), scpReadyTime: 0,
                             indestructible: type === 'scp173_entity', nextTeleportTime: 0, scpKillUntil: 0,
                             updateAccumulator: Math.random() * 0.02, audioStarted: false,
                             isDoor: type === 'hl2_door', doorOpen: false, doorClosedY: mesh.rotation.y, doorTargetY: mesh.rotation.y,
-                            doorAngularVelocity: 0, doorOpenDirection: 1
+                            doorAngularVelocity: 0, doorOpenDirection: 1, doorWidth, doorHeight, doorThickness
                         };
 
                         if (isNPC && trevorAmbientAudioUrls[type]) {
@@ -3385,8 +3509,10 @@
                         radius: radius, height: h, isHeld: false, isFrozen: false, balloons: [],
                         spawnTime: clock.getElapsedTime(), isNPC: isNPC, hp: isNextbot ? (nextbotConfigs[type]?.hp || nextbotConfig.hp) : (type === 'zombie' ? 40 : 100), isDead: false, lastAttack: 0, class: classType, audio: audioObj,
                         type: type, id: Math.floor(Math.random() * 1000), isCorpse: isCorpse,
-                        mass: mass, invMass: 1 / mass, restitution: 0.08, friction: 0.7,
-                        sleepTimer: 0, grounded: false, path: [], pathIndex: 0, pathTimer: Math.random() * 0.3,
+                        mass: mass, invMass: 1 / mass, restitution: 0.055, friction: 0.76,
+                        linearDamping: THREE.MathUtils.lerp(0.035, 0.075, THREE.MathUtils.clamp(mass / 220, 0, 1)),
+                        angularDamping: THREE.MathUtils.lerp(0.72, 0.38, THREE.MathUtils.clamp(mass / 220, 0, 1)),
+                        sleepTimer: 0, grounded: false, physgunHoldQuaternion: null, path: [], pathIndex: 0, pathTimer: Math.random() * 0.3,
                         lastPathPosition: new THREE.Vector3(x, y, z), stuckTime: 0, pathTarget: new THREE.Vector3(),
                         config: isNextbot ? (nextbotConfigs[type] || nextbotConfig) : null, updateAccumulator: Math.random() * 0.02, audioStarted: false
                     };
@@ -3828,6 +3954,8 @@
                         EngineState.heldProp.isRagdollHeld = false;
                         EngineState.heldRagdollParticle = null;
                     }
+                    EngineState.heldProp.angularVelocity.set(0, 0, 0);
+                    EngineState.heldProp.physgunHoldQuaternion = null;
                     EngineState.heldProp.isHeld = false; EngineState.heldProp = null; EngineState.isFiringPhysgun = false;
                 }
                 EngineState.isFiringSMG = false;
@@ -4071,6 +4199,10 @@
                                     } else {
                                         EngineState.heldProp.isHeld = true;
                                     }
+                                    if (EngineState.heldProp.isHeld) {
+                                        EngineState.heldProp.physgunHoldQuaternion = EngineState.heldProp.mesh.quaternion.clone();
+                                        EngineState.heldProp.angularVelocity.set(0, 0, 0);
+                                    }
                                 }
                             } else EngineState.grabDistance = 500; 
                             if ( weapons[1].action ) { weapons[1].action.reset(); weapons[1].action.setLoop( THREE.LoopRepeat ); weapons[1].action.play(); }
@@ -4079,7 +4211,7 @@
                                 EngineState.isSwinging = true; EngineState.swingProgress = 0;
                                 if ( weapons[0].action ) { weapons[0].action.stop(); weapons[0].action.setLoop( THREE.LoopOnce ); weapons[0].action.play(); }
                                 raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
-                                let meleeTarget = null; let meleeDistance = 4.2;
+                                let meleeTarget = null; let meleeRemotePeer = null; let meleeDistance = 4.2;
                                 for (const npc of npcs) {
                                     if (npc.isDead) continue;
                                     const center = npc.mesh.position.clone(); center.y += npc.class === 'nextbot' ? 0 : Math.min(1.2, npc.radius);
@@ -4088,7 +4220,20 @@
                                         meleeTarget = npc; meleeDistance = distance;
                                     }
                                 }
-                                if (meleeTarget) {
+                                remotePlayers.forEach((entry, peerId) => {
+                                    if (!entry.group.visible || entry.wasDead) return;
+                                    const center = entry.group.position.clone().add(new THREE.Vector3(0, 1.55, 0));
+                                    const distance = camera.position.distanceTo(center);
+                                    if (distance <= meleeDistance && raycaster.ray.distanceSqToPoint(center) < 1.05) {
+                                        meleeRemotePeer = peerId; meleeTarget = null; meleeDistance = distance;
+                                    }
+                                });
+                                if (meleeRemotePeer) {
+                                    const entry = remotePlayers.get(meleeRemotePeer);
+                                    const hitPoint = entry.group.position.clone().add(new THREE.Vector3(0, 1.55, 0));
+                                    spawnBlood(hitPoint);
+                                    window.sendMultiplayerDamage?.(meleeRemotePeer, 45, webmodNet.playerName || 'Player');
+                                } else if (meleeTarget) {
                                     const hitPoint = raycaster.ray.closestPointToPoint(meleeTarget.mesh.position, new THREE.Vector3());
                                     spawnBlood(hitPoint); hurtNPC(meleeTarget, 45);
                                     const knock = raycaster.ray.direction.clone().multiplyScalar(7); knock.y = 3.5;
@@ -4106,6 +4251,7 @@
                                 EngineState.heldProp.isRagdollHeld = false;
                                 EngineState.heldRagdollParticle = null;
                             }
+                            EngineState.heldProp.physgunHoldQuaternion = null;
                             EngineState.heldProp.isHeld = false; EngineState.heldProp = null; EngineState.isFiringPhysgun = false;
                             if ( weapons[1].action ) weapons[1].action.stop();
                         }
@@ -4126,9 +4272,8 @@
                                 EngineState.heldProp.isRagdollHeld = false;
                                 EngineState.heldRagdollParticle = null;
                             }
-                            if (EngineState.heldProp.velocity.lengthSq() > 5.0) {
-                                EngineState.heldProp.angularVelocity.set( (Math.random() - 0.5) * 1.5, (Math.random() - 0.5) * 1.5, (Math.random() - 0.5) * 1.5 );
-                            }
+                            EngineState.heldProp.angularVelocity.set(0, 0, 0);
+                            EngineState.heldProp.physgunHoldQuaternion = null;
                             EngineState.heldProp.isHeld = false; EngineState.heldProp = null;
                         }
                         if ( weapons[1].action ) weapons[1].action.stop();
@@ -4144,6 +4289,7 @@
                         const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);
                         EngineState.heldProp.mesh.rotateOnWorldAxis(up, event.movementX * 0.005);
                         EngineState.heldProp.mesh.rotateOnWorldAxis(right, event.movementY * 0.005);
+                        EngineState.heldProp.physgunHoldQuaternion = EngineState.heldProp.mesh.quaternion.clone();
                     } else {
                         const sensitivity = window.webmodSettings.sensitivity / 100;
                         camera.rotation.y -= event.movementX * 0.002 * sensitivity;
@@ -4162,6 +4308,8 @@
                             EngineState.heldProp.isRagdollHeld = false;
                             EngineState.heldRagdollParticle = null;
                         }
+                        EngineState.heldProp.angularVelocity.set(0, 0, 0);
+                        EngineState.heldProp.physgunHoldQuaternion = null;
                         EngineState.heldProp.isHeld = false; EngineState.heldProp = null; EngineState.isFiringPhysgun = false;
                         if ( weapons[1].action ) weapons[1].action.stop();
                     }
@@ -4378,7 +4526,7 @@
                 setTimeout(() => { damageFlash.style.opacity = '0'; }, 90);
                 if (playerHealth <= 0) {
                     playerHealth = 0; EngineState.isDead = true;
-                    addKillFeed(attacker, 'Player');
+                    addKillFeed(attacker, webmodNet.active ? (webmodNet.playerName || 'Player') : 'Player');
                     EngineState.deathPosition.copy(playerCollider.start);
                     EngineState.deathCameraRotation = camera.rotation.clone();
                     EngineState.deathTime = clock.getElapsedTime();
@@ -4423,6 +4571,12 @@
                     camera.rotation.z += (Math.random()-0.5)*0.3; 
                 }
             }
+
+            window.applyMultiplayerDamage = function(packet) {
+                if (!packet || EngineState.isDead) return;
+                const damage = THREE.MathUtils.clamp(Number(packet.damage) || 0, 0, 100);
+                if (damage > 0) takeDamage(damage, cleanPlayerName(packet.attackerName, 'Player'));
+            };
 
             function accelerateHorizontal(wishDir, wishSpeed, acceleration, deltaTime) {
                 if (wishDir.lengthSq() < 0.0001) return;
@@ -4515,6 +4669,34 @@
                 }
             }
 
+            function resolvePlayerDoorCollision(door) {
+                const width = door.doorWidth || 1.8;
+                const height = door.doorHeight || 3.15;
+                const halfThickness = Math.max(0.06, (door.doorThickness || 0.18) * 0.5);
+                door.mesh.updateMatrixWorld(true);
+
+                const localBottom = door.mesh.worldToLocal(new THREE.Vector3(playerCollider.start.x, playerCollider.start.y - playerCollider.radius, playerCollider.start.z));
+                const localTop = door.mesh.worldToLocal(new THREE.Vector3(playerCollider.end.x, playerCollider.end.y + playerCollider.radius, playerCollider.end.z));
+                if (localTop.y < 0 || localBottom.y > height) return;
+
+                const localPlayer = door.mesh.worldToLocal(new THREE.Vector3(playerCollider.start.x, playerCollider.start.y, playerCollider.start.z));
+                const closestX = THREE.MathUtils.clamp(localPlayer.x, 0, width);
+                const closestZ = THREE.MathUtils.clamp(localPlayer.z, -halfThickness, halfThickness);
+                let pushLocal = new THREE.Vector3(localPlayer.x - closestX, 0, localPlayer.z - closestZ);
+                let distance = pushLocal.length();
+                if (distance >= playerCollider.radius) return;
+                if (distance < 0.0001) {
+                    const zSide = localPlayer.z >= 0 ? 1 : -1;
+                    pushLocal.set(0, 0, zSide); distance = 0;
+                } else pushLocal.multiplyScalar(1 / distance);
+
+                const pushWorld = pushLocal.transformDirection(door.mesh.matrixWorld).normalize();
+                const overlap = playerCollider.radius - distance + 0.012;
+                playerCollider.translate(pushWorld.clone().multiplyScalar(overlap));
+                const intoDoor = playerVelocity.dot(pushWorld);
+                if (intoDoor < 0) playerVelocity.addScaledVector(pushWorld, -intoDoor);
+            }
+
             function updatePlayer( deltaTime ) {
                 if (EngineState.isDead) return;
 
@@ -4553,6 +4735,7 @@
                 for ( let i = 0; i < props.length; i++ ) {
                     const prop = props[i]; 
                     if (prop.isHeld) continue; 
+                    if (prop.isDoor) { resolvePlayerDoorCollision(prop); continue; }
                     const pX = playerCollider.start.x; const pZ = playerCollider.start.z;
                     const dx = prop.mesh.position.x - pX; const dz = prop.mesh.position.z - pZ;
                     const distSq = dx * dx + dz * dz;
@@ -4913,6 +5096,13 @@
                     targetDistance = Math.hypot(npc.mesh.position.x - playerCollider.start.x, npc.mesh.position.z - playerCollider.start.z);
                     target = { type: 'player', pos: playerCollider.start };
                 }
+                if (!EngineState.npcsIgnorePlayer && webmodNet.active && webmodNet.isHost) {
+                    remotePlayers.forEach((entry, peerId) => {
+                        if (!entry.group.visible || entry.wasDead) return;
+                        const distance = Math.hypot(npc.mesh.position.x - entry.group.position.x, npc.mesh.position.z - entry.group.position.z);
+                        if (distance < targetDistance) target = { type:'remote-player', peerId, name:entry.group.userData.playerName || 'Player', pos:entry.group.position }, targetDistance = distance;
+                    });
+                }
                 if (npc.type === 'scp173' && EngineState.npcVsNpc) {
                     for (let j = 0; j < npcs.length; j++) {
                         const other = npcs[j];
@@ -4921,7 +5111,7 @@
                         if (distance < targetDistance) { targetDistance = distance; target = { type: 'npc', ref: other, pos: other.mesh.position }; }
                     }
                 }
-                if (EngineState.isDead) {
+                if (EngineState.isDead && target?.type !== 'remote-player') {
                     const away = npc.mesh.position.clone().sub(EngineState.deathPosition).setY(0);
                     if (away.lengthSq() < 0.01) away.set(1, 0, 0);
                     target = { type: 'flee', pos: npc.mesh.position.clone().addScaledVector(away.normalize(), 25) };
@@ -4941,6 +5131,7 @@
                         if (now >= (npc.nextAttackTime || 0)) {
                             npc.nextAttackTime = now + 0.9;
                             if (target.type === 'player') takeDamage(1000, npc);
+                            else if (target.type === 'remote-player') window.sendMultiplayerDamage?.(target.peerId, 100, combatName(npc));
                             else hurtNPC(target.ref, 72, npc, false);
                         }
                     } else if (now >= (npc.nextTeleportTime || 0)) {
@@ -5030,6 +5221,19 @@
                     } else npc.isAggro = true;
                     if (npc.isAggro) { closestDist = playerDistance; closestTarget = { type: 'player', pos: playerCollider.start }; }
                 }
+                if (!EngineState.npcsStopped && !EngineState.npcsIgnorePlayer && !scpLocked && webmodNet.active && webmodNet.isHost) {
+                    remotePlayers.forEach((entry, peerId) => {
+                        if (!entry.group.visible || entry.wasDead) return;
+                        const position = entry.group.position;
+                        const distance = Math.hypot(npc.mesh.position.x - position.x, npc.mesh.position.z - position.z);
+                        if (npc.isTrevor && distance > config.chaseDistance) return;
+                        if (distance < closestDist) {
+                            closestDist = distance;
+                            closestTarget = { type:'remote-player', peerId, name:entry.group.userData.playerName || 'Player', pos:position };
+                            npc.isAggro = true;
+                        }
+                    });
+                }
                 if (!EngineState.npcsStopped && EngineState.npcVsNpc && !scpLocked) {
                     for (let j = 0; j < npcs.length; j++) {
                         if (j === npcIndex || npcs[j].isDead) continue;
@@ -5038,7 +5242,7 @@
                         if (dist < closestDist) { closestDist = dist; closestTarget = { type: 'npc', ref: npcs[j], pos: npcs[j].mesh.position }; }
                     }
                 }
-                if (!EngineState.npcsStopped && EngineState.isDead) {
+                if (!EngineState.npcsStopped && EngineState.isDead && closestTarget?.type !== 'remote-player') {
                     const away = npc.mesh.position.clone().sub(EngineState.deathPosition); away.y = 0;
                     if (away.lengthSq() < 0.01) away.set(Math.random() - 0.5, 0, Math.random() - 0.5);
                     away.normalize();
@@ -5154,7 +5358,7 @@
                     if (closestTarget && now >= (npc.nextAttackTime || 0)) {
                         npc.lastAttack = now;
                         let attackAction = setNPCMovementAnimation(npc, 'attack', true);
-                        if ((npc.type === 'scp096' || npc.type === 'scp096_static') && closestTarget.type === 'player') {
+                        if ((npc.type === 'scp096' || npc.type === 'scp096_static') && (closestTarget.type === 'player' || closestTarget.type === 'remote-player')) {
                             npc.activeAttack?.stop();
                             const killAction = npc.specialActions?.kill;
                             if (killAction) { killAction.reset(); killAction.setLoop(THREE.LoopOnce); killAction.clampWhenFinished = true; killAction.play(); npc.activeAttack = killAction; attackAction = killAction; }
@@ -5171,6 +5375,8 @@
                             takeDamage(config.damage, npc);
                             const shove = playerCollider.start.clone().sub(npc.mesh.position).setY(0).normalize();
                             playerVelocity.add(shove.multiplyScalar(npc.class === 'nextbot' ? 9 : 4));
+                        } else if (closestTarget.type === 'remote-player' && Math.abs(closestTarget.pos.y - getNPCFootY(npc)) < 4.5) {
+                            window.sendMultiplayerDamage?.(closestTarget.peerId, config.damage, combatName(npc));
                         } else if (closestTarget.type === 'npc' && Math.abs(closestTarget.pos.y - npc.mesh.position.y) < 4.5) {
                             const npcDamage = (npc.type === 'scp096' || npc.type === 'scp096_static') ? 62 : (npc.class === 'nextbot' ? 100 : Math.max(30, config.damage));
                             hurtNPC(closestTarget.ref, npcDamage, npc, false);
@@ -5401,20 +5607,33 @@
 
                     if (prop.balloons.length > 0) { const weight = prop.mass * 0.55; const lift = prop.balloons.length * 18; prop.velocity.y += (lift - weight) * prop.invMass * deltaTime; prop.isFrozen = false; prop.sleepTimer = 0; }
                     if (prop.isRagdollHeld) { prop.isFrozen = false; prop.sleepTimer = 0; }
+                    const wasGrounded = prop.grounded;
+                    prop.grounded = false;
                     if ( prop.isFrozen ) { prop.velocity.set(0, 0, 0); prop.angularVelocity.set(0, 0, 0); } 
                     else if ( prop.isHeld ) {
                         const targetPos = new THREE.Vector3(); camera.getWorldDirection( targetPos );
                         targetPos.multiplyScalar( EngineState.grabDistance ).add( camera.position );
                         const displacement = targetPos.sub(prop.mesh.position);
-                        const spring = THREE.MathUtils.clamp(54 / Math.sqrt(Math.max(1, prop.mass)), 10, 42);
-                        prop.velocity.addScaledVector(displacement, spring * deltaTime);
-                        prop.velocity.multiplyScalar(Math.exp(-6.5 * deltaTime));
-                        prop.velocity.clampLength(0, 72); prop.angularVelocity.multiplyScalar(Math.exp(-10 * deltaTime));
+                        const responsiveness = THREE.MathUtils.clamp(18 / Math.pow(Math.max(1, prop.mass), 0.16), 7.5, 17);
+                        const desiredVelocity = displacement.multiplyScalar(responsiveness).clampLength(0, 58);
+                        prop.velocity.lerp(desiredVelocity, 1 - Math.exp(-15 * deltaTime));
+                        if (desiredVelocity.lengthSq() < 0.018) prop.velocity.multiplyScalar(Math.exp(-22 * deltaTime));
+                        prop.angularVelocity.set(0, 0, 0);
+                        if (!keyStates['KeyE'] && prop.physgunHoldQuaternion) {
+                            prop.mesh.quaternion.slerp(prop.physgunHoldQuaternion, 1 - Math.exp(-28 * deltaTime));
+                        }
                         prop.sleepTimer = 0;
                     } else {
                         prop.velocity.y -= GRAVITY * deltaTime;
-                        prop.velocity.multiplyScalar(Math.exp(-0.055 * deltaTime));
-                        prop.angularVelocity.multiplyScalar(Math.exp(-0.42 * deltaTime));
+                        const linearDamping = prop.linearDamping ?? 0.055;
+                        const angularDamping = (prop.angularDamping ?? 0.58) + (wasGrounded ? 2.8 : 0);
+                        prop.velocity.multiplyScalar(Math.exp(-linearDamping * deltaTime));
+                        prop.angularVelocity.multiplyScalar(Math.exp(-angularDamping * deltaTime));
+                        if (wasGrounded) {
+                            const groundDrag = 1 - Math.exp(-(prop.friction ?? 0.7) * 5.2 * deltaTime);
+                            prop.velocity.x *= 1 - groundDrag;
+                            prop.velocity.z *= 1 - groundDrag;
+                        }
                         prop.velocity.clampLength(0, 110);
                     }
 
@@ -5441,18 +5660,21 @@
                     const result = worldOctree.sphereIntersect( sphere );
                     if ( result && !prop.isFrozen ) {
                         prop.mesh.position.add( result.normal.clone().multiplyScalar( result.depth ) );
+                        if (result.normal.y > 0.55) prop.grounded = true;
                         if ( !prop.isHeld ) {
                             const dot = prop.velocity.dot( result.normal );
                             if ( dot < 0 ) {
                                 const normalVel = result.normal.clone().multiplyScalar(dot); const tangentVel = prop.velocity.clone().sub(normalVel);
-                                prop.velocity.addScaledVector( result.normal, -(1 + prop.restitution) * dot );
-                                const frictionFactor = THREE.MathUtils.clamp(prop.friction * deltaTime * 35, 0, 0.82);
+                                const impactSpeed = Math.abs(dot);
+                                const effectiveRestitution = impactSpeed > 4.0 ? prop.restitution : prop.restitution * THREE.MathUtils.smoothstep(impactSpeed, 1.1, 4.0);
+                                prop.velocity.addScaledVector( result.normal, -(1 + effectiveRestitution) * dot );
+                                const frictionFactor = THREE.MathUtils.clamp((prop.friction ?? 0.7) * (0.24 + impactSpeed * 0.055), 0, 0.88);
                                 prop.velocity.addScaledVector(tangentVel, -frictionFactor);
-                                if (tangentVel.lengthSq() > 0.1) {
+                                if (tangentVel.lengthSq() > 2.25 && impactSpeed > 1.2) {
                                     const tumbleAxis = result.normal.clone().cross(tangentVel).normalize();
-                                    const tumbleSpeed = tangentVel.length() * 0.035; prop.angularVelocity.add(tumbleAxis.multiplyScalar(tumbleSpeed));
+                                    const tumbleSpeed = Math.min(1.8, tangentVel.length() * impactSpeed * 0.012); prop.angularVelocity.add(tumbleAxis.multiplyScalar(tumbleSpeed));
                                 }
-                                if (result.normal.y > 0.55 && Math.abs(dot) < 1.2) prop.velocity.y = 0;
+                                if (result.normal.y > 0.55 && impactSpeed < 2.0) prop.velocity.y = 0;
                             }
                         }
                     }
@@ -5478,7 +5700,7 @@
                             const invB = (p2.isFrozen || p2.isHeld) ? 0 : p2.invMass;
                             const invSum = invA + invB;
                             if (invSum > 0) {
-                                const correction = normal.clone().multiplyScalar(Math.max(0, overlap - 0.01) * 0.78 / invSum);
+                                const correction = normal.clone().multiplyScalar(Math.max(0, overlap - 0.006) * 0.86 / invSum);
                                 if (invA > 0) prop.mesh.position.addScaledVector(correction, invA);
                                 if (invB > 0) p2.mesh.position.addScaledVector(correction, -invB);
 
@@ -5490,6 +5712,16 @@
                                     const impulse = normal.clone().multiplyScalar(impulseMagnitude);
                                     if (invA > 0) prop.velocity.addScaledVector(impulse, invA);
                                     if (invB > 0) p2.velocity.addScaledVector(impulse, -invB);
+
+                                    const tangent = relVel.clone().addScaledVector(normal, -velAlongNormal);
+                                    if (tangent.lengthSq() > 0.0001) {
+                                        tangent.normalize();
+                                        const rawFrictionImpulse = -relVel.dot(tangent) / invSum;
+                                        const frictionLimit = impulseMagnitude * Math.sqrt((prop.friction ?? 0.7) * (p2.friction ?? 0.7));
+                                        const frictionImpulse = tangent.multiplyScalar(THREE.MathUtils.clamp(rawFrictionImpulse, -frictionLimit, frictionLimit));
+                                        if (invA > 0) prop.velocity.addScaledVector(frictionImpulse, invA);
+                                        if (invB > 0) p2.velocity.addScaledVector(frictionImpulse, -invB);
+                                    }
                                     prop.sleepTimer = 0; p2.sleepTimer = 0;
                                 }
                             }
@@ -5917,8 +6149,23 @@
                         raycaster.far = 5000;
                         
                         let hitNPC = null;
+                        let hitRemotePeer = null;
                         let hitPos = null;
                         let minDist = Infinity;
+
+                        remotePlayers.forEach((entry, peerId) => {
+                            if (!entry.group.visible || entry.wasDead) return;
+                            const center = entry.group.position.clone().add(new THREE.Vector3(0, 1.55, 0));
+                            const forgiveness = 0.88;
+                            if (raycaster.ray.distanceSqToPoint(center) >= forgiveness * forgiveness) return;
+                            const toPlayer = center.clone().sub(camera.position);
+                            if (toPlayer.dot(raycaster.ray.direction) <= 0) return;
+                            const distance = camera.position.distanceTo(center);
+                            if (distance < minDist && (!hits[0] || hits[0].distance > distance - forgiveness)) {
+                                minDist = distance; hitRemotePeer = peerId; hitNPC = null;
+                                hitPos = raycaster.ray.closestPointToPoint(center, new THREE.Vector3());
+                            }
+                        });
                         
                         for (let n = 0; n < npcs.length; n++) {
                             let npc = npcs[n];
@@ -5937,13 +6184,17 @@
                                     if (d < minDist && (!hits[0] || hits[0].distance > d - forgiveness)) {
                                         minDist = d;
                                         hitNPC = npc;
+                                        hitRemotePeer = null;
                                         hitPos = raycaster.ray.closestPointToPoint(center, new THREE.Vector3());
                                     }
                                 }
                             }
                         }
 
-                        if (hitNPC) {
+                        if (hitRemotePeer) {
+                            spawnBlood(hitPos);
+                            window.sendMultiplayerDamage?.(hitRemotePeer, 20, webmodNet.playerName || 'Player');
+                        } else if (hitNPC) {
                             spawnBlood(hitPos);
                             hurtNPC(hitNPC, 20);
                         } else if (hits.length > 0) {
